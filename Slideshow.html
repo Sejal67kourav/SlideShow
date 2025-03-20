@@ -1,0 +1,130 @@
+<!-- -----------------------------------------QUESTION-3------------------------------------------------------------ -->
+<!--Create a slideshow with at least 20 images (take some dummy images)*
+    - There should be a button to stop the slideshow and start the slideshow show
+    - Provide a next and previous button below the slideshow.
+    - On clicking the next or previous button, the automatic slideshow will stop
+    - And it will work as a normal slider-->
+<!-- ------------------------------------------------------------------------------------------------------------ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slideshow with Controls</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: rgb(123, 156, 156);
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 600px;
+            margin: auto;
+        }
+        .slide {
+            display: flex;
+        }
+        .slide img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border:2px sloid black;
+        }
+        .buttons {
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+        }
+        button:hover {
+            background-color:aquamarine ;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slideshow-container">
+        <!-- Slideshow Images -->
+        <div class="slide"><img src="https://picsum.photos/600/400?random=1" alt="Image 1"></div>
+        <div class="slide"><img src="https://picsum.photos/600/400?random=2" alt="Image 2"></div>
+        <div class="slide"><img src="https://picsum.photos/600/400?random=3" alt="Image 3"></div>
+        <div class="slide"><img src="https://picsum.photos/600/400?random=4" alt="Image 4"></div>
+        <div class="slide"><img src="https://picsum.photos/600/400?random=5" alt="Image 5"></div>
+        <div class="slide"><img src="https://picsum.photos/600/400?random=6" alt="Image 6"></div>
+        <div class="slide"><img src="https://picsum.photos/600/400?random=7" alt="Image 7"></div>
+        <div class="slide"><img src="https://picsum.photos/600/400?random=8" alt="Image 8"></div>
+        <div class="slide"><img src="https://picsum.photos/600/400?random=9" alt="Image 9"></div>
+        <div class="slide"><img src="https://picsum.photos/600/400?random=10" alt="Image 10"></div>
+        <div class="slide"><img src="https://picsum.photos/600/400?random=11" alt="Image 11"></div>
+        <div class="slide"><img src="https://picsum.photos/600/400?random=12" alt="Image 12"></div>
+        <div class="slide"><img src="https://picsum.photos/600/400?random=13" alt="Image 13"></div>
+        <div class="slide"><img src="https://picsum.photos/600/400?random=14" alt="Image 14"></div>
+        <div class="slide"><img src="https://picsum.photos/600/400?random=15" alt="Image 15"></div>
+        <div class="slide"><img src="https://picsum.photos/600/400?random=16" alt="Image 16"></div>
+        <div class="slide"><img src="https://picsum.photos/600/400?random=17" alt="Image 17"></div>
+        <div class="slide"><img src="https://picsum.photos/600/400?random=18" alt="Image 18"></div>
+        <div class="slide"><img src="https://picsum.photos/600/400?random=19" alt="Image 19"></div>
+        <div class="slide"><img src="https://picsum.photos/600/400?random=20" alt="Image 20"></div>
+    </div>
+
+    <div class="buttons">
+        <button id="prev">Previous</button>
+        <button id="Pause">Stop</button>
+        <button id="next">Next</button>
+    </div>
+    <script>
+        let slideIndex = 0;
+        let slides = document.querySelectorAll(".slide");
+        let playPauseBtn = document.getElementById("Pause");
+        let isPlaying = true;
+        let interval;
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.display = i === index ? "block" : "none";
+            });
+        }
+        function nextSlide() {
+            slideIndex = (slideIndex + 1) % slides.length;
+            showSlide(slideIndex);
+        }
+        function prevSlide() {
+            slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+            showSlide(slideIndex);
+        }
+        function startSlideshow() {
+            interval = setInterval(nextSlide, 2000);
+            playPauseBtn.textContent = "Stop";
+            isPlaying = true;
+        }
+
+        function stopSlideshow() {
+            clearInterval(interval);
+            playPauseBtn.textContent = "Start";
+            isPlaying = false;
+        }
+        function toggleSlideshow() {
+            isPlaying ? stopSlideshow() : startSlideshow();
+        }
+        document.getElementById("next").addEventListener("click", () => {
+            stopSlideshow();
+            nextSlide();
+        });
+        document.getElementById("prev").addEventListener("click", () => {
+            stopSlideshow();
+            prevSlide();
+        });
+        playPauseBtn.addEventListener("click", toggleSlideshow);
+        // Initialize Slideshow
+        showSlide(slideIndex);
+        startSlideshow();
+    </script>
+</body>
+</html>
